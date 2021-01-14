@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+
+
+
+        <script type="text/babel">
+
+        const Number = (props) => {
+            return (
+            <>
+            <span>{props.num}</span><span>&euro;</span>
+            </>
+            )
+        }
+        const DataBox = (props)=>{
+            const classes = props.bg ? `${props.bg} dataBox` : 'dataBox black_border'        
+            return (
+                <div className={classes}>
+                    {props.children}
+                </div>
+            )
+        }
+        const PointSlider = (props) =>{
+            const [slider, setSlider] = React.useState(0)
+
+            const onSlide = (e) => {
+                      setSlider(parseInt(e.target.value));
+                
+                
+            };
+            React.useEffect(()=>{
+                props.setter(slider)
+            }, [slider])
+
+            return (
+                <>
+                <h1>{props.title}</h1>
+                <input type="range" min={props.min} max={props.max} value={slider} className="slider" id="myRange" onChange={(e) => onSlide(e)} />
+            
+                </>
+            )
+        }
+        function App() {
+
+        const [normirani, setNorminarni] = React.useState(0);
+
+        const [pio, setPio] = React.useState(0);
+        const [zdravstvo, setZdravstvo] = React.useState(0);        
+        const [dohodak, setDohodak] = React.useState(0);
+
+        const [bruto, setBruto] = React.useState(0);
+        const [neto, setNeto] = React.useState(0);
+        const [osnovica, setOsnovica] = React.useState(0);
+
+        const [namet, setNamet] = React.useState(0);
+        const [nametZdr, setNametZdr] = React.useState(0);
+        const [nametPio, setNametPio] = React.useState(0);
+        const [nametDohodak, setNametDohodak] = React.useState(0);
+        const [normiraniSuma, setNorminarniSuma] = React.useState(0);
+        
+        React.useEffect(()=>{
+            const decimale = [zdravstvo*0.01, dohodak*0.01, pio*0.01]           
+
+            setNorminarniSuma(bruto*(normirani*0.01))
+            setOsnovica(bruto-normiraniSuma)
+            let redukovano = decimale.reduce((a,b)=>a+b)
+            setNamet(redukovano!==0 ? osnovica*redukovano : 0)
+            setNametZdr(osnovica*(zdravstvo*0.01))
+            setNametPio(osnovica*(pio*0.01))
+            setNametDohodak(osnovica*(dohodak*0.01))
+            setNeto(osnovica-namet)
+
+     
+
+        },[pio,normirani,zdravstvo,dohodak,bruto])
+
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <h1>Kalkulator za frilensere</h1>
+                    <p>tvoja okvirna zarada</p>
+                    <div>
+                        <input type='text' onChange={(e)=>setBruto(parseInt(e.target.value))}/> <span>&euro;</span>
+                        <p>{bruto}</p>
+                    </div>
+
+                    <div id="PointSlideri">
+                        <div className='up'>
+                            <div className="elementSlide">
+                                <PointSlider setter={setNorminarni} min={0} max={100} title='Norminarni'/>
+                                <p>{normirani} %</p>
+                            </div>
+                        </div>
+                        <div className='down'>
+                            <div className="elementSlide">
+                                <PointSlider setter={setZdravstvo} min={0} max={100} title='Zdravstvo'/>
+                                <p>{zdravstvo} %</p>
+                            </div>
+                            <div className="elementSlide">
+                                <PointSlider setter={setPio} min={0} max={100} title='Pio'/>
+                                <p>{pio} %</p>
+                            </div>
+                            <div className="elementSlide">
+                                <PointSlider setter={setDohodak} min={0} max={30} title="Porez na dohodak"/>
+                                <p>{dohodak} %</p>
+                            </div>    
+                        </div>
+
+                        
+                    </div>
+                    <div className="resut">
+                        <DataBox>
+                            <p>Tvoja zarada</p>
+                            <Number num={bruto} colorE={'red'} bg={'gren'}/>
+                        </DataBox>
+                        <DataBox bg={'red_bg_light rowFlex'}>
+
+                            <div className="left">
+                                <p>ukupni nameti </p>
+                                <Number num={namet.toFixed(2)} colorE={'red'} colorNum={'gren'}/>
+                            </div>
+
+                            <div className="right">
+                                <ul>
+                                    <li>osnovica {osnovica.toFixed(2)}</li>
+                                    <li>zdravstveno {nametZdr.toFixed(2)}</li>
+                                    <li>pio {nametPio.toFixed(2)}</li>
+                                    <li>dohodal {nametDohodak.toFixed(2)}</li>
+                                </ul>
+
+                            </div>
+
+                        </DataBox>
+                        <DataBox bg={'green_bg'}>
+                            <p> Nosiš kući (neto zarada)</p>
+                            <Number num={neto.toFixed(2)} colorE={'red'} />
+                        </DataBox>
+                    </div>
+                </header>
+            </div>
+        );
+        }
+
+            ReactDOM.render(
+                <App />,
+                document.getElementById('root')
+            );
+
+        </script>
+
+
+  </body>
+</html>

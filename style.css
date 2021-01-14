@@ -1,0 +1,161 @@
+/*
+siva pozadina inputa #ecf1f8
+siva pozadina #f2f4ff
+siva pozadina slajdera #cbcbcb
+font boja #0e1c31
+зелени еуро #71ba1b 
+zelena pozadina #d6ffe6
+Crvena svetlija #ffaaaa
+crvena tmnija #ffa0a0
+plava balocic #4866ff
+
+*/
+
+
+/* colors constants*/
+.gray_input{
+  background-color: #ecf1f8;
+  border-color: #ecf1f8 !important;
+}
+
+.gray_bg{
+  background-color:  #f2f4ff;
+  border-color: #f2f4ff !important;
+}
+
+.gray_slider{
+  background-color:  #cbcbcb;
+  border-color: #cbcbcb !important;
+}
+
+.black-font{
+  background-color: #0e1c31;
+  border-color: #0e1c31 !important;
+}
+.green_bg{
+  background-color: #71ba1b;
+  border-color: #71ba1b !important; 
+}
+
+.green_bg{
+  background-color: #d6ffe6;
+  border-color: #d6ffe6 !important;
+}
+
+.red_bg_light{
+  background-color:  #ffaaaa;
+  border-color: #ffaaaa !important;
+}
+.red_bg_dark{
+  background-color:  #ffa0a0;
+  border-color: #ffa0a0 !important;
+}
+.blue{
+  background-color:  #4866ff;
+  border-color: #4866ff !important;
+}
+
+
+* {
+    color: black;
+}
+
+.App {
+    text-align: center;
+
+  }
+  
+
+
+  .slider {
+      height:2px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    background: white; /* Green background */
+    border-radius: 50%;
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    background: white; /* Green background */
+
+    border-radius: 50%;
+    cursor: pointer; /* Cursor on hover */
+
+  }
+  .slider::-moz-range-thumb::after , .slider::-moz-range-::after {
+    content: 'zzz';
+    width: 5px;
+    height: 5px;
+    background-color: red;
+  }
+
+  .resut {
+      margin-top: 30px;
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+  }
+  .rowFlex{
+    display:flex;
+    flex-direction: row;
+  }
+
+  .left, .right{
+    width:50%;
+  }
+  li {
+    list-style-type: none
+  }
+  .dataBox {
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 1rem;
+      width: 400px;
+      height: 200px
+
+  }
+
+  .black_border{
+    border-color: black;
+  }
+
+  #PointSlideri {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #F2f4ff;
+      color: #0E1c31;
+      font-size: 16px;
+      align-items: center;
+      justify-content: center;
+  }
+  .down{
+      display:flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+     
+  }
+  .up {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .elementSlide {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
