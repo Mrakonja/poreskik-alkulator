@@ -49,15 +49,32 @@
                 </>
             )
         }
+
+        function validirajStrUnosKaoBroj(tekst){
+            if(isNaN(parseInt(tekst))){
+                return 0;
+            }else {
+                return parseInt(tekst)
+            }
+        }
+
+        function useBruto(value){
+            // React custom hook: https://reactjs.org/docs/hooks-custom.html
+            // https://serverless-stack.com/chapters/create-a-custom-react-hook-to-handle-form-fields.html
+            const [bruto, setBruto] = React.useState(value);
+            const setValue = (value) => setBruto(validirajStrUnosKaoBroj(value))
+            return [bruto, setValue]
+        }
+
         function App() {
 
-        const [normirani, setNorminarni] = React.useState(0);
+        const [normirani, setNormirani] = React.useState(0);
 
         const [pio, setPio] = React.useState(0);
         const [zdravstvo, setZdravstvo] = React.useState(0);        
         const [dohodak, setDohodak] = React.useState(0);
 
-        const [bruto, setBruto] = React.useState(0);
+        const [bruto, setBruto] = useBruto(0);
         const [neto, setNeto] = React.useState(0);
         const [osnovica, setOsnovica] = React.useState(0);
 
@@ -65,12 +82,12 @@
         const [nametZdr, setNametZdr] = React.useState(0);
         const [nametPio, setNametPio] = React.useState(0);
         const [nametDohodak, setNametDohodak] = React.useState(0);
-        const [normiraniSuma, setNorminarniSuma] = React.useState(0);
+        const [normiraniSuma, setNormiraniSuma] = React.useState(0);
         
         React.useEffect(()=>{
             const decimale = [zdravstvo*0.01, dohodak*0.01, pio*0.01]           
 
-            setNorminarniSuma(bruto*(normirani*0.01))
+            setNormiraniSuma(bruto*(normirani*0.01))
             setOsnovica(bruto-normiraniSuma)
             let redukovano = decimale.reduce((a,b)=>a+b)
             setNamet(redukovano!==0 ? osnovica*redukovano : 0)
@@ -96,7 +113,7 @@
                     <div id="PointSlideri">
                         <div className='up'>
                             <div className="elementSlide">
-                                <PointSlider setter={setNorminarni} min={0} max={100} title='Norminarni'/>
+                                <PointSlider setter={setNormirani} min={0} max={100} title='Normirani'/>
                                 <p>{normirani} %</p>
                             </div>
                         </div>
