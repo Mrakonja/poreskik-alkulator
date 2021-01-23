@@ -13,7 +13,7 @@
 
 
         <script type="text/babel">
-
+        /* cSpell:disable */
         const Number = (props) => {
             return (
             <>
@@ -87,14 +87,18 @@
         React.useEffect(()=>{
             const decimale = [zdravstvo*0.01, dohodak*0.01, pio*0.01]           
 
-            setNormiraniSuma(bruto*(normirani*0.01))
-            setOsnovica(bruto-normiraniSuma)
-            let redukovano = decimale.reduce((a,b)=>a+b)
-            setNamet(redukovano!==0 ? osnovica*redukovano : 0)
-            setNametZdr(osnovica*(zdravstvo*0.01))
-            setNametPio(osnovica*(pio*0.01))
-            setNametDohodak(osnovica*(dohodak*0.01))
-            setNeto(osnovica-namet)
+            var zadnjaNormiraniSuma = bruto*(normirani*0.01)
+            setNormiraniSuma(zadnjaNormiraniSuma)
+            var zadnjaOsnovica = bruto-zadnjaNormiraniSuma;
+            setOsnovica(zadnjaOsnovica)
+
+            let redukovano = decimale.reduce((a,b)=>a+b) //sabira procente svih nameta iz niza decimale kao vrednost od 0.0 do 1.0
+            var zadnjiNamet = redukovano!==0 ? zadnjaOsnovica*redukovano : 0
+            setNamet(zadnjiNamet)
+            setNametZdr(zadnjaOsnovica*(zdravstvo*0.01))
+            setNametPio(zadnjaOsnovica*(pio*0.01))
+            setNametDohodak(zadnjaOsnovica*(dohodak*0.01))
+            setNeto(bruto-zadnjiNamet)
 
      
 
